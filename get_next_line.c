@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:23 by daafonso          #+#    #+#             */
-/*   Updated: 2024/10/31 19:12:59 by daafonso         ###   ########.fr       */
+/*   Updated: 2024/11/03 21:30:47 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,62 @@ char	*ft_join_and_free(char *text, char *buffer)
 	return (temp);
 }
 
-// char	*ft_line(char *text)
-// {
-// 	char	*line;
-// 	int		i;
+char	*ft_next(char *text)
+{
+	int		i;
+	int		j;
+	char	new_text;
 
-// 	i = 0;
-// 	if (!text[0])
-// 		return (NULL);
-// 	while(text[i] && text[i] != '\n')
-// 	{
-// 		i++;
-// 	}
-// 	line 
-// 	return (text);
-// }
+	i = 0;
+	while (text[i] && text[i] != '\n')
+		i++;
+	if (text[i] == '\0')
+	{
+		free(text);
+		return (NULL);
+	}
+	i++;
+	j = 0;
+	while (text[i + j])
+		j++;
+	new_text = ft_calloc(j + 1, sizeof(char));
+	if (!new_text)
+		return (free(text), NULL);
+	j = -1;
+	while (text[i] && text[i] != '\n')
+	{
+		/* code */
+	}
+	
+}
+
+char	*ft_line(char *text)
+{
+	char	*line;
+	int		i;
+
+	i = 0;
+	if (!text[0])
+		return (NULL);
+	while (text[i] && text[i] != '\n')
+		i++;
+	line = ft_calloc(i + 2, sizeof(char));
+	if (!line)
+		return (NULL);
+	i = 0;
+	while (text[i] && text[i] != '\n')
+	{
+		line[i] = text[i];
+		i++;
+	}
+	if (text[i] == '\n')
+	{
+		line[i] == '\n';
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
 
 char	*read_first_line(int fd, char *text)
 {
@@ -52,13 +93,11 @@ char	*read_first_line(int fd, char *text)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read == -1)
-		{
-			free (text);
-			free (buffer);
-			return (NULL);
-		}
-		buffer[bytes_read] = 0;
+			return (free (buffer), free (text), NULL);
+		buffer[bytes_read] = '\0';
 		text = ft_join_and_free(text, buffer);
+		if (!text)
+			return (free(buffer), NULL);
 		if (ft_strchr(text, '\n'))
 			break ;
 	}
@@ -69,7 +108,7 @@ char	*read_first_line(int fd, char *text)
 char	*get_next_line(int fd)
 {
 	static char	*text;
-	//char		*line;
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
@@ -83,11 +122,10 @@ char	*get_next_line(int fd)
 	text = read_first_line(fd, text);
 	if (!text)
 		return (NULL);
-	// line = ft_line(text);
-	// text = ft_next(text);
+	line = ft_line(text);
+	text = ft_next(text);
 	return (text);
 }
-
 
 int	main(void)
 {
@@ -99,7 +137,6 @@ int	main(void)
 	{
 		printf("%s", a);
 	}
-
 	// printf("%s", get_next_line(fd));
 	return (0);
 }
@@ -107,12 +144,18 @@ int	main(void)
 //BUT: lire et affciher chaque ligne d'un fichier text
 //------------------------------------------------------
 //READ_FILE: trouve la premiere ligne et s'arrette au \n
-//2 Conditions de sorties: fin du texte ou \n trouvé
+//2 Conditions de sorties: fin du texte ou \n trouvé(avec char apres)
 //text = calloc(1,1) initialise l'espace mémoire à 0, 
 //donc text pointe alors vers une chaîne vide.
 //bytes_read = read(fd, buffer, BUFFER_SIZE)
 //si bytes_read = 0, on atteint la fin du texte
 //buffer stocke le nb de char lu, BS combien d'octet lire
 //fd est le fichier source a lire
+// FIN text = "blabla\n salut les amis"
 //------------------------------------------------------
-//FT_LINE:
+//FT_LINE: extrait la ligne en incluant \n (sans char apres)
+// avant "blabla\n salut les amis" -> apres "blabla\n"
+//------------------------------------------------------
+//FT_NEXT: recuperer le text sans la ligne du debut
+//avant text="blabla\n salut les amis.." 
+//-> apres "salut les amis, je suis gentil.."
