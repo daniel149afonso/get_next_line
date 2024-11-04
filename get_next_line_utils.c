@@ -6,61 +6,32 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:31:32 by daafonso          #+#    #+#             */
-/*   Updated: 2024/10/31 19:16:04 by daafonso         ###   ########.fr       */
+/*   Updated: 2024/11/04 15:41:45 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	char	*str;
-	size_t	len_total;
-
-	len_total = ft_strlen(s1);
-	len_total += ft_strlen(s2);
-	str = malloc(sizeof(char) * (len_total + 1));
-	if (!str)
-		return (NULL);
-	ft_strlcpy(str, s1, len_total + 1);
-	ft_strlcat(str, s2, len_total + 1);
-	return (str);
-}
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
-{
-	size_t	i;
-
-	i = 0;
-	if (!size)
-		return (ft_strlen(src));
-	i = 0;
-	while (src[i] && i < (size - 1))
-	{
-		dst[i] = src[i];
-		i++;
-	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
-}
-
-size_t	ft_strlcat(char *dst, const char *src, size_t size)
-{
+	char	*result;
 	size_t	i;
 	size_t	j;
 
 	i = 0;
 	j = 0;
-	while (dst[i] && i < size)
-		i++;
-	while (src[j] && (i + j + 1) < size)
-	{
-		dst[i + j] = src[j];
-		j++;
-	}
-	if (i < size)
-		dst[i + j] = '\0';
-	return (i + ft_strlen(src));
+	if (!s1 && !s2)
+		return (NULL);
+	result = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
+	if (!result)
+		return (NULL);
+	while (s1 && s1[j] != '\0')
+		result[i++] = s1[j++];
+	j = 0;
+	while (s2 && s2[j] != '\0')
+		result[i++] = s2[j++];
+	result[i] = '\0';
+	return (result);
 }
 
 void	*ft_calloc(size_t nmemb, size_t size)
@@ -98,4 +69,18 @@ char	*ft_strchr(const char *s, int c)
 	if (s[i] == (char)c)
 		return ((char *)&s[i]);
 	return (NULL);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*str;
+	size_t			i;
+
+	str = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		str[i] = 0;
+		i++;
+	}
 }

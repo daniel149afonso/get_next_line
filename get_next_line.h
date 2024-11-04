@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:31 by daafonso          #+#    #+#             */
-/*   Updated: 2024/10/31 19:11:57 by daafonso         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:00:11 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-# include <fcntl.h>//A SUPPRIMER
+# include <fcntl.h>//utiliser open
 # include <stdio.h>//A SUPPRIMER
 
 # ifndef BUFFER_SIZE
@@ -30,7 +28,5 @@ void	*ft_calloc(size_t count, size_t size);
 size_t	ft_strlen(const char *str);
 char	*ft_strchr(const char *s, int c);
 void	ft_bzero(void *s, size_t n);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:23 by daafonso          #+#    #+#             */
-/*   Updated: 2024/11/03 21:30:47 by daafonso         ###   ########.fr       */
+/*   Updated: 2024/11/04 16:10:45 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,13 @@ char	*ft_next(char *text)
 {
 	int		i;
 	int		j;
-	char	new_text;
+	char	*new_text;
 
 	i = 0;
 	while (text[i] && text[i] != '\n')
 		i++;
 	if (text[i] == '\0')
-	{
-		free(text);
-		return (NULL);
-	}
+		return (free(text), NULL);
 	i++;
 	j = 0;
 	while (text[i + j])
@@ -42,12 +39,14 @@ char	*ft_next(char *text)
 	new_text = ft_calloc(j + 1, sizeof(char));
 	if (!new_text)
 		return (free(text), NULL);
-	j = -1;
-	while (text[i] && text[i] != '\n')
+	j = 0;
+	while (text[i + j] != '\0')
 	{
-		/* code */
-	}
-	
+		new_text[j] = text[i + j];
+		j++;
+	}	
+	free(text);
+	return (new_text);
 }
 
 char	*ft_line(char *text)
@@ -71,7 +70,7 @@ char	*ft_line(char *text)
 	}
 	if (text[i] == '\n')
 	{
-		line[i] == '\n';
+		line[i] = '\n';
 		i++;
 	}
 	line[i] = '\0';
@@ -124,22 +123,21 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = ft_line(text);
 	text = ft_next(text);
-	return (text);
+	return (line);
 }
 
-int	main(void)
-{
-	int		fd;
-	char	*a;
+// int	main(void)
+// {
+// 	int		fd;
+// 	char	*a;
 
-	fd = open("a.txt", O_RDONLY);
-	while ((a = get_next_line(fd)))
-	{
-		printf("%s", a);
-	}
-	// printf("%s", get_next_line(fd));
-	return (0);
-}
+// 	fd = open("teswt.txt", O_RDONLY);
+// 	while ((a = get_next_line(fd)))
+// 	{
+// 		printf("%s", a);
+// 	}
+// 	return (0);
+// }
 
 //BUT: lire et affciher chaque ligne d'un fichier text
 //------------------------------------------------------
@@ -154,8 +152,13 @@ int	main(void)
 // FIN text = "blabla\n salut les amis"
 //------------------------------------------------------
 //FT_LINE: extrait la ligne en incluant \n (sans char apres)
-// avant "blabla\n salut les amis" -> apres "blabla\n"
+// avant "blablabla\n salut les amis" -> apres "blabla\n"
 //------------------------------------------------------
 //FT_NEXT: recuperer le text sans la ligne du debut
-//avant text="blabla\n salut les amis.." 
-//-> apres "salut les amis, je suis gentil.."
+//avant text="blabla\n salut les amis" 
+//-> apres "salut les amis"
+//---------------------------------------------------------
+//---------------------------------------------------------
+//---------------------------------------------------------
+//2 EME APPEL DE GET NEXT LINE
+//
