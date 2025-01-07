@@ -6,7 +6,7 @@
 /*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:31 by daafonso          #+#    #+#             */
-/*   Updated: 2024/11/04 16:00:11 by daafonso         ###   ########.fr       */
+/*   Updated: 2024/11/05 16:45:04 by daafonso         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>//utiliser open
-# include <stdio.h>//A SUPPRIMER
+# include <sys/types.h>
+# include <sys/uio.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
+#  define BUFFER_SIZE 1024
 # endif
 
 char	*get_next_line(int fd);
