@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: daafonso <daafonso@student.42.fr>          +#+  +:+       +#+        */
+/*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:23 by daafonso          #+#    #+#             */
-/*   Updated: 2024/11/05 19:48:58 by daafonso         ###   ########.fr       */
+/*   Updated: 2025/02/28 02:15:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_next(char *text)
 	{
 		new_text[j] = text[i + j];
 		j++;
-	}	
+	}
 	free(text);
 	return (new_text);
 }
@@ -129,12 +129,13 @@ char	*get_next_line(int fd)
 // int	main(void)
 // {
 // 	int		fd;
-// 	char	*a;
+// 	char	*line;
 
-// 	fd = open("teswt.txt", O_RDONLY);
-// 	while ((a = get_next_line(fd)))
+// 	fd = open("test.txt", O_RDONLY);
+// 	while ((line = get_next_line(fd)))
 // 	{
-// 		printf("%s", a);
+// 		printf("%s", line);
+// 		free(line);
 // 	}
 // 	return (0);
 // }
