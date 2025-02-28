@@ -6,7 +6,7 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:23 by daafonso          #+#    #+#             */
-/*   Updated: 2025/02/28 02:15:33 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/02/28 02:41:33 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_join_and_free(char *text, char *buffer)
 	return (temp);
 }
 
-char	*ft_next(char *text)
+char	*ft_get_next_chars(char *text)
 {
 	int		i;
 	int		j;
@@ -49,7 +49,7 @@ char	*ft_next(char *text)
 	return (new_text);
 }
 
-char	*ft_line(char *text)
+char	*ft_get_line(char *text)
 {
 	char	*line;
 	int		i;
@@ -77,7 +77,7 @@ char	*ft_line(char *text)
 	return (line);
 }
 
-char	*read_first_line(int fd, char *text)
+char	*ft_read_first_line(int fd, char *text)
 {
 	char	*buffer;
 	int		bytes_read;
@@ -118,11 +118,11 @@ char	*get_next_line(int fd)
 		}
 		return (NULL);
 	}
-	text = read_first_line(fd, text);
+	text = ft_read_first_line(fd, text);
 	if (!text)
 		return (NULL);
-	line = ft_line(text);
-	text = ft_next(text);
+	line = ft_get_line(text);
+	text = ft_get_next_chars(text);
 	return (line);
 }
 
@@ -142,24 +142,23 @@ char	*get_next_line(int fd)
 
 //BUT: lire et affciher chaque ligne d'un fichier text
 //------------------------------------------------------
-//READ_FILE: trouve la premiere ligne et s'arrette au \n
-//2 Conditions de sorties: fin du texte ou \n trouvé(avec char apres)
-//text = calloc(1,1) initialise l'espace mémoire à 0, 
+//FT_READ_FIRST_LINE: trouve la premiere ligne et s'arrette au \n
+//2 Conditions de sorties: c'est la fin du texte ou \n trouvé(avec char apres)
+//text = calloc(1,1) initialise l'espace mémoire à 1, 
 //donc text pointe alors vers une chaîne vide.
 //bytes_read = read(fd, buffer, BUFFER_SIZE)
 //si bytes_read = 0, on atteint la fin du texte
-//buffer stocke le nb de char lu, BS combien d'octet lire
+//buffer stocke le nb de char lu, BUFFER_SIZE combien d'octet lire
 //fd est le fichier source a lire
-// FIN text = "blabla\n salut les amis"
+// Exemple: text = "blabla\n salut les amis"
 //------------------------------------------------------
-//FT_LINE: extrait la ligne en incluant \n (sans char apres)
-// avant "blablabla\n salut les amis" -> apres "blabla\n"
+//FT_GET_LINE: extrait la ligne en incluant \n (sans char apres)
+// Avant: "blablabla\n salut les amis" -> Apres: "blabla\n"
 //------------------------------------------------------
-//FT_NEXT: recuperer le text sans la ligne du debut
-//avant text="blabla\n salut les amis" 
-//-> apres "salut les amis"
+//FT_GET_NEXT_CHARS: recuperer le text sans la ligne du debut
+//Avant: text="blabla\n salut les amis" 
+//-> Apres: "salut les amis"
 //---------------------------------------------------------
 //---------------------------------------------------------
 //---------------------------------------------------------
-//2 EME APPEL DE GET NEXT LINE
-//# include <stdio.h>//
+//2 EME APPEL DE GET NEXT LINE: on repart à la deuxieme ligne
