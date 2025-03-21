@@ -13,9 +13,6 @@ L’objectif principal est de comprendre la gestion de la mémoire dynamique, le
 ## Fonctions 🧠
 
 - `get_next_line(int fd)` : renvoie la ligne suivante d’un fichier, incluant le retour à la ligne (`\n`) si présent.
-- Bonus :
-  - Gérer plusieurs `fd` à la fois
-  - Versions `get_next_line_utils.c` et `get_next_line_bonus.c`
 
 ## Fichiers 📁
 
