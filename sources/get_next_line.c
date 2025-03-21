@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 17:52:23 by daafonso          #+#    #+#             */
-/*   Updated: 2025/03/21 18:43:54 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/03/21 19:26:44 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_join_and_free(char *text, char *buffer)
 {
@@ -126,19 +126,21 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
+int	main(int argc, char **argv)
+{
+	int		fd;
+	char	*line;
 
-// 	fd = open("test.txt", O_RDONLY);
-// 	while ((line = get_next_line(fd)))
-// 	{
-// 		printf("%s", line);
-// 		free(line);
-// 	}
-// 	return (0);
-// }
+	if (argc != 2)
+		return (1);
+	fd = open(argv[1], O_RDONLY);
+	while ((line = get_next_line(fd)))
+	{
+		printf("%s", line);
+		free(line);
+	}
+	return (0);
+}
 
 //BUT: lire et affciher chaque ligne d'un fichier text
 //------------------------------------------------------

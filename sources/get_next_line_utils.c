@@ -6,11 +6,11 @@
 /*   By: daniel149afonso <daniel149afonso@studen    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 16:31:32 by daafonso          #+#    #+#             */
-/*   Updated: 2025/03/21 18:43:58 by daniel149af      ###   ########.fr       */
+/*   Updated: 2025/03/21 19:12:32 by daniel149af      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "../includes/get_next_line.h"
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {
